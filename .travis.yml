@@ -1,0 +1,17 @@
+language: python
+python:
+  - 3.5
+
+services:
+  - docker
+
+install:
+  - docker build -t test-sqs .
+  - docker run -d -p 127.0.0.1:8080:8080 --name sqs test-sqs
+
+before_script:
+  - pip install -r tests/requirements.txt
+
+script:
+  - docker ps | grep -q sqs
+  - nose2
