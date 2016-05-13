@@ -5,6 +5,9 @@ python:
 services:
   - docker
 
+env:
+  - AWS_DEFAULT_REGION='us-east-1'
+
 install:
   - docker build -t test-sqs .
   - docker run -d -p 127.0.0.1:8080:8080 --name sqs test-sqs
